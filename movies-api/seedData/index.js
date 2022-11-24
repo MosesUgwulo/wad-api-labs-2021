@@ -1,8 +1,8 @@
-import userModel from '../api/users/userModel';
 import users from './users';
-import dotenv from 'dotenv';
 import genres from './genres';
+import userModel from '../api/users/userModel';
 import genreModel from '../api/genres/genresModel';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -18,6 +18,7 @@ async function loadUsers() {
   }
 }
 
+// deletes all genre documents in collection and inserts test data
 async function loadGenres() {
     console.log('load genre Data');
     try {
@@ -30,6 +31,6 @@ async function loadGenres() {
 }
 
 if (process.env.SEED_DB) {
-  loadUsers();
-  loadGenres();
+    loadUsers();
+    loadGenres();
 }
