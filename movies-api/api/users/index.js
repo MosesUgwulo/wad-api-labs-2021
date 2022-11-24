@@ -22,6 +22,7 @@ router.post('/', asyncHandler(async (req, res) => {
     else {  //NEW CODE!!!
         const user = await User.findByUserName(req.body.username);
         if (user.comparePassword(req.body.password)) {
+
             req.session.user = req.body.username;
             req.session.authenticated = true;
             res.status(200).json({

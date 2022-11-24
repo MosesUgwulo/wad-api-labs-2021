@@ -10,7 +10,7 @@ import authenticate from './authenticate';
 
 dotenv.config();
 
-const errHandler = (err, req, res, next) => {
+const errHandler = (err, req, res) => {
   /* if the error in development then send stack trace to display whole error,
   if it's in production then just send error message  */
   if(process.env.NODE_ENV === 'production') {
@@ -20,6 +20,13 @@ const errHandler = (err, req, res, next) => {
 };
 
 const app = express();
+
+app.use(session({
+  secret: 'ilikecake',
+  resave: true,
+  saveUninitialized: true
+}));
+
 const port = process.env.PORT;
 
 app.use(express.json());
@@ -27,11 +34,6 @@ app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/movies', authenticate, moviesRouter);
 app.use(errHandler);
-app.use(session({
-  secret: 'ilikecake',
-  resave: true,
-  saveUninitialized: true
-}));
 
 
 app.listen(port, () => {
