@@ -30,7 +30,7 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
-// Add passport.authenticate(..)  to middleware stack for protected routes​
+// Add passport.authenticate(..)  to middleware stack for protected routes
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 app.use(errHandler);
 
